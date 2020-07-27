@@ -1,30 +1,39 @@
-import { createStackNavigator } from '@react-navigation/stack';
-
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import App from "../pages/App";
-import Sobre from "../pages/sobre";
-
-const Stack = createStackNavigator();
+import Produto from "../pages/produto";
+import Financeiro from "../pages/financeiro/financeiro";
+const Tab = createBottomTabNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator
+    <Tab.Navigator
       initialRouteName="Home"
       headerMode="screen"
     >
-      <Stack.Screen
+      <Tab.Screen
         name="Home"
         component={App}
         options={{
           title: 'Home',
         }}
       />
-      <Stack.Screen
-        name="Sobre"
-        component={Sobre}
+      <Tab.Screen
+        name="Produto"
+        component={Produto}
         options={{
-          title: 'Sobre',
+          title: 'Produto',
         }}
       />
-    </Stack.Navigator>
+      <Tab.Screen
+        name="Financeiro"
+        component={Financeiro}
+        options={{
+          title: 'Financeiro',
+        }}
+      />
+    </Tab.Navigator>
   );
 }
+
+export default MyStack;

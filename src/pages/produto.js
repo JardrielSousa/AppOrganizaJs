@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View ,ScrollView, FlatList } from 'react-native';
+import React, { Fragment, Component } from "react";
+import { StyleSheet, Text , View ,ScrollView, FlatList } from 'react-native';
 
 import Header from '../components/cabecalho/cabecalho'
 
 
-class App extends Component {
+class Produto extends Component{
   state = {
     personagens: {
       id:0,
@@ -27,14 +27,27 @@ class App extends Component {
   }
 
   render() {
+    
   return (
+    
      <ScrollView>
        <View style={styles.container}>
-        <View style={styles.header}>
-          <Header>
-            <Text style={styles.textHeader}>Js Organiza</Text>
-          </Header>
-        </View>
+    <View style={styles.header}>
+    <Header>
+       <Text style={styles.textHeader}>Js Organiza</Text>
+     </Header>
+    </View>
+      <FlatList data={this.state.personagens} 
+          renderItem={({item})=>
+          <View style={styles.cardItem}>
+              <Text >Id:{item.id}</Text>
+              <Text >Nome do Produto:{item.nome}</Text>
+              <Text >Valor:{item.valor}</Text>
+              <Text >Quantidade:{item.quantidade}</Text>
+          </View>
+  }> 
+            
+          </FlatList>
       </View>
     </ScrollView>
   );
@@ -42,7 +55,7 @@ class App extends Component {
    }
 }
 
-export default App;
+export default Produto;
 
 const styles = StyleSheet.create({
   container:{
@@ -73,3 +86,4 @@ const styles = StyleSheet.create({
       padding:10
   }
 });
+

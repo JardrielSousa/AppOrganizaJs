@@ -1,40 +1,23 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View ,ScrollView, FlatList } from 'react-native';
+import React, { Fragment, Component } from "react";
+import { StyleSheet, Text , View ,ScrollView, FlatList } from 'react-native';
 
-import Header from '../components/cabecalho/cabecalho'
+import Header from '../../components/cabecalho/cabecalho'
 
 
-class App extends Component {
-  state = {
-    personagens: {
-      id:0,
-      nome:'',
-      valor:0.0,
-      quantidade:0
-    },
-  }
-
-  async componentWillMount() {
-    try {
-      const response = await fetch('https://organizadbapi.herokuapp.com/v1/produto');
-      const dataJson = await response.json();
-
-      this.setState({ personagens: dataJson });
-      console.log(this.state.personagens)
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
+class Financeiro extends Component{
+  
   render() {
+    
   return (
+    
      <ScrollView>
        <View style={styles.container}>
         <View style={styles.header}>
-          <Header>
-            <Text style={styles.textHeader}>Js Organiza</Text>
-          </Header>
+            <Header>
+                <Text style={styles.textHeader}>Js Organiza</Text>
+            </Header>
         </View>
+        <Text>Financeiro</Text>
       </View>
     </ScrollView>
   );
@@ -42,7 +25,7 @@ class App extends Component {
    }
 }
 
-export default App;
+export default Financeiro;
 
 const styles = StyleSheet.create({
   container:{
@@ -73,3 +56,4 @@ const styles = StyleSheet.create({
       padding:10
   }
 });
+
