@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from "react";
-import { StyleSheet, Text , View ,ScrollView, FlatList, Button } from 'react-native';
+import { StyleSheet, Text , View ,ScrollView, FlatList, Button, TextInput,TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal'
 import Header from '../components/cabecalho/cabecalho'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -57,15 +57,18 @@ class Produto extends Component{
               <Button title="Deletar" type="outline"/> 
          </View>
   }> </FlatList>
-        <Modal isVisible={this.state.isModalVisible} style={{
-          width:500}}>
-        <form>
-        <label>
-          Nome:
-          <input type="text" name="name" />
-        </label>
-        <input type="submit" value="Enviar" />
-      </form>
+        <Modal isVisible={this.state.isModalVisible} >
+          <View style={styles.contentModal}>
+          <View style={styles.viewForm}>
+            <Text style={styles.textLabel}>Nome: </Text>
+            <TextInput style={styles.textInput} placeholder="Name"/>
+            <TouchableOpacity style={styles.btnEdit}>
+              <Text style={styles.btnEditText}>Editar</Text>
+            </TouchableOpacity>
+          </View>
+          </View>
+          
+        
         </Modal>
       </View>
     </ScrollView>
@@ -103,6 +106,48 @@ const styles = StyleSheet.create({
       textAlign: "center",
       fontSize: 20,
       padding:10
+  },
+  contentModal: {
+    height: 300,
+    width: "85%",
+    borderRadius: 20,
+    backgroundColor: "#fff",
+    alignSelf: "center"
+  },
+  viewForm: {
+    marginTop: 10,
+    // marginLeft: 20
+  },
+  textLabel: {
+    fontSize: 16,
+    color: "#212121",
+    fontWeight:"bold",
+    marginLeft: 20
+
+  },
+  textInput: {
+    height: 40,
+    width: 240,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    marginTop: 10,
+    paddingLeft: 10,
+    marginLeft: 20
+  },
+  btnEdit: {
+    height: 40,
+    width: 180,
+    backgroundColor: "#212121",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
+    marginTop: 50,
+    alignSelf: "center"
+  },
+  btnEditText: {
+    color: "#fff",
+    fontSize: 14
   }
 });
 
