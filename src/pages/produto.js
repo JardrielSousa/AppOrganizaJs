@@ -82,11 +82,9 @@ class Produto extends Component {
     }
 
     render() {
-        const { isModalVisible } = this.state;
-        console.log("ITEM PER/", this.state.modalData.nome);
-        console.log("ITEM PER/", this.state.modalData.valor);
-        console.log("ITEM PER/", this.state.modalData.quantidade);
-
+        const { isModalVisible, modalData: { nome, valor, quantidade   } } = this.state;
+  
+        
         return (
             <ScrollView>
                 <View style={styles.container}>
@@ -122,7 +120,7 @@ class Produto extends Component {
                                 <TextInput
                                     style={styles.textInput}
                                     placeholder="nome"
-                                    value={this.state.modalData.nome}
+                                    value={nome}
                                     onChangeText={(value) =>
                                         this.setState({
                                             modalData: { nome: value },
@@ -133,7 +131,7 @@ class Produto extends Component {
                                 <TextInput
                                     style={styles.textInput}
                                     placeholder="Valor"
-                                    value={this.state.modalData.valor}
+                                    value={String(valor)}
                                     onChangeText={(value) =>
                                         this.setState({
                                             modalData: { valor: value },
@@ -144,7 +142,7 @@ class Produto extends Component {
                                 <TextInput
                                     style={styles.textInput}
                                     placeholder="Quantidade:"
-                                    value={this.state.modalData.quantidade}
+                                    value={String(quantidade)}
                                     onChangeText={(value) =>
                                         this.setState({
                                             modalData: { quantidade: value },
