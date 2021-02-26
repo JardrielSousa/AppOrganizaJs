@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from "react";
-
+import axios from 'axios';
 import {
     StyleSheet,
     Text,
@@ -46,32 +46,17 @@ class Produto extends Component {
         });
     };
 
-    //   isModalVisible:false,
-    //   itemPersonagens:{}
-    // }
-
-    //   openModal = (item) =>{
-    //     this.setState({
-    //       isModalVisible:!this.state.isModalVisible
-    //     });
-    //     if(item){
-    //       this.setState({
-    //         itemPersonagens: {
-    //           id:item.id,
-    //           nome:item.nome,
-    //           valor:item.valor,
-    //           quantidade:item.quantidade
-    //         }});
-
-    //       }else{
-    //       Alert.alert('nadaaaaaa')
-    //     }
-    //     }
-
+    editarProduto = (item)=>{
+        axios.put('http://localhost:8080/v1/produto/{id}',item.id,item)
+      .then(res => {
+        const modalData = res.data;
+        this.setState({ modalData });
+      })
+    }
     async componentWillMount() {
         try {
             const response = await fetch(
-                "https://organizadbapi.herokuapp.com/v1/produto"
+                "https://organizadbapi.herokuapp.com//v1/produto"
             );
             const dataJson = await response.json();
             this.setState({ personagens: dataJson });
@@ -97,7 +82,6 @@ class Produto extends Component {
                         data={this.state.personagens}
                         renderItem={({ item }) => (
                             <View style={styles.cardItem}>
-                                <Text>Id:{item.id}</Text>
                                 <Text>Nome do Produto:{item.nome}</Text>
                                 <Text>Valor:{item.valor}</Text>
                                 <Text>Quantidade:{item.quantidade}</Text>
@@ -123,7 +107,11 @@ class Produto extends Component {
                                     value={nome}
                                     onChangeText={(value) =>
                                         this.setState({
-                                            modalData: { nome: value },
+                                            modalData: { 
+                                                nome: value,
+                                                valor : this.state.modalData.valor,
+                                                quantidade : this.state.modalData.quantidade,
+                                             },
                                         })
                                     }
                                     editable={true}
@@ -134,7 +122,11 @@ class Produto extends Component {
                                     value={String(valor)}
                                     onChangeText={(value) =>
                                         this.setState({
-                                            modalData: { valor: value },
+                                            modalData: { 
+                                                nome: this.state.modalData.nome,
+                                                valor : value,
+                                                quantidade : this.state.modalData.quantidade,
+                                             },
                                         })
                                     }
                                     editable={true}
@@ -145,13 +137,16 @@ class Produto extends Component {
                                     value={String(quantidade)}
                                     onChangeText={(value) =>
                                         this.setState({
-                                            modalData: { quantidade: value },
+                                            modalData: { 
+                                                nome: this.state.modalData.nome,
+                                                valor : this.state.modalData.valor,
+                                                quantidade: value },
                                         })
                                     }
                                     editable={true}
                                 />
                                 <TouchableOpacity style={styles.btnEdit}>
-                                    <Text style={styles.btnEditText}>
+                                    <Text style={styles.btnEditText} onPress={()=>this.editarProduto(item)}>
                                         Editar
                                     </Text>
                                 </TouchableOpacity>
